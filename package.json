@@ -1,0 +1,23 @@
+{
+  "name": "dbc_admin",
+  "version": "1.0.0",
+  "description": "this applicaiton is created and maintain by dbc news 24/7",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/satejsarker/elctro-D.git",
+  "keywords": [
+    "dbc"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "~1.7.8"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-winstaller": "^2.6.3",
+    "mysql": "^2.15.0"
+  }
+}
