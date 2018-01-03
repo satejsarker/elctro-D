@@ -1,0 +1,49 @@
+<h1>{{title}}</h1>
+<p>Welcome to DBC NEWS </p>
+
+
+<a href="/h">going to h </a>
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+          
+            <div class="alert alert-success" style="display:none;">
+                <span class="glyphicon glyphicon-ok"></span> Drag table row and cange Order</div>
+            <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Details</th>
+                   <th>Created at </th>
+                </tr>
+            </thead>
+                <tbody>
+                     {{#each news}}
+                     {{#each this}}
+                    <tr class="sucess">
+                        <td>
+                           {{this.id}}
+                        </td>
+                        <td>
+                            {{this.headline}}
+                        </td>
+                        <td>
+                            {{this.headline}}
+                        </td>
+                        <td>
+                            {{this.created_at}}
+                        </td>
+                    </tr>
+                    {{/each}}
+                        {{/each}}                   
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

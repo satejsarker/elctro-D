@@ -1,6 +1,7 @@
 const electron = require('electron')
     // Module to control application life.
 const app = electron.app;
+const jqury=require('jquery');
 
 if (handleSquirrelEvent(app)) {
     // squirrel event handled and app will exit in 1000ms, so don't do anything else
@@ -31,7 +32,8 @@ function createWindow() {
         height: 720,
         autoHideMenuBar: true,
         useContentSize: true,
-        resizable: false,
+        resizable: true,
+        icon:__dirname+'/server/public/images/icon.png'
     });
 
 
