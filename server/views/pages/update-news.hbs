@@ -1,16 +1,28 @@
+<script>
+    if(document.getElementById("check").checked){
+        console.log("value is there ")
+    }
+
+</script>
 <div class="content">
+   
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <form method="post" action="#" class="form-horizontal">
+                        {{!-- {{#each sel_category}}
+                        {{#each this}}
+                            {{this.id}}
+                        {{/each}}
+                        {{/each}} --}}
                         <div class="card-content">
                             <div class="row">
                                 <label class="col-sm-2 label-on-left">শিরোনাম</label>
                                 <div class="col-sm-10">
                                     <div class="form-group label-floating is-empty">
                                         <label class="control-label"></label>
-                                        <input type="text" class="form-control" placeholder="সুন্দর শিরোনাম লিখুন">
+                                        <input type="text" class="form-control" placeholder="সুন্দর শিরোনাম লিখুন" value="{{headline}}">
                                     </div>
                                     <span class="help-block">Error Message</span>
                                 </div>
@@ -18,21 +30,19 @@
                             <div class="row">
                                 <label class="col-sm-2 label-on-left">বিভাগসমূহ</label>
                                 <div class="col-sm-10">
-                                    <div class="checkbox checkbox-inline">
-                                        <label>
-                                            <input type="checkbox" name="optionsCheckboxes">জাতীয়
-                                        </label>
-                                    </div>
-                                    <div class="checkbox checkbox-inline">
-                                        <label>
-                                            <input type="checkbox" name="optionsCheckboxes">আন্তর্জাতিক
-                                        </label>
-                                    </div>
-                                    <div class="checkbox checkbox-inline">
-                                        <label>
-                                            <input type="checkbox" name="optionsCheckboxes">রাজনীতি
-                                        </label>
-                                    </div>
+                                    {{#each category_list}}
+                                    {{#each this}}
+                                        <div class="checkbox checkbox-inline">
+                                            <label>
+                                                <input type="checkbox" name="optionsCheckboxes" id="check" value="{{ this.id }}"
+                                                 {{!-- {{#ifCond value '===' 1}} --}}
+                                                checked
+                                              
+                                                >{{this.name}} 
+                                            </label>
+                                        </div>
+                                    {{/each}}
+                                    {{/each}}
                                     <span class="help-block">Error Message</span>
                                 </div>
                             </div>
@@ -42,12 +52,24 @@
                                     <div style="padding-top: 28px;">
                                         <div class="togglebutton">
                                             <label>
-                                                <input type="checkbox"> টপ নিউজ
+                                                <input type="checkbox"
+                                                {{#if this.top_news}}
+                                                    checked
+                                                {{else}}
+                                                    
+                                                {{/if}}
+                                                > টপ নিউজ
                                             </label>
                                         </div>
                                         <div class="togglebutton">
                                             <label>
-                                                <input type="checkbox"> ব্রেকিং নিউজ
+                                                <input type="checkbox"
+                                                {{#if this.breaking_news}}
+                                                    checked
+                                                {{else}}
+                                                    
+                                                {{/if}}
+                                                > ব্রেকিং নিউজ 
                                             </label>
                                         </div>
                                         <span class="help-block">Error Message</span>
@@ -59,17 +81,17 @@
                                 <div class="col-sm-10">
                                     <div class="form-group label-floating is-empty">
                                         <label class="control-label"></label>
-                                        <input class="form-control" placeholder="ছবি যুক্ত করুন">
+                                        <input class="form-control" placeholder="ছবি যুক্ত করুন" value="{{ this.photo }}">
                                     </div>
                                     <span class="help-block">Error Message</span>
                                 </div>
                             </div>
                             <div class="row">
-                                <label class="col-sm-2 label-on-left">হেডলাইন</label>
+                                <label class="col-sm-2 label-on-left">ভিডিও</label>
                                 <div class="col-sm-10">
                                     <div class="form-group label-floating is-empty">
                                         <label class="control-label"></label>
-                                        <textarea class="form-control" placeholder="সংক্ষিপ্ত বিবরণ লিখুন" style="vertical:none;" rows="3"></textarea>
+                                        <input class="form-control" placeholder="ভিডিও যুক্ত করুন" value="{{ this.video }}">
                                     </div>
                                     <span class="help-block">Error Message</span>
                                 </div>
@@ -79,7 +101,7 @@
                                 <div class="col-sm-10">
                                     <div class="form-group label-floating is-empty">
                                         <label class="control-label"></label>
-                                        <textarea class="form-control tinymce" placeholder="বিস্তারিত বর্ণনা লিখুন" style="vertical:none;"></textarea>
+                                        <textarea class="form-control tinymce" placeholder="বিস্তারিত বর্ণনা লিখুন" style="vertical:none;">{{{this.description}}}</textarea>
                                     </div>
                                     <span class="help-block">Error Message</span>
                                 </div>

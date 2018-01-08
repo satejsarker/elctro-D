@@ -18,21 +18,15 @@
                             <div class="row">
                                 <label class="col-sm-2 label-on-left">বিভাগসমূহ</label>
                                 <div class="col-sm-10">
+                                    {{#each category}}
+                                    {{#each this}}
                                     <div class="checkbox checkbox-inline">
                                         <label>
-                                            <input type="checkbox" name="optionsCheckboxes">জাতীয়
+                                            <input type="checkbox" name="optionsCheckboxes" value="{{ this.id }}">{{this.name}}
                                         </label>
                                     </div>
-                                    <div class="checkbox checkbox-inline">
-                                        <label>
-                                            <input type="checkbox" name="optionsCheckboxes">আন্তর্জাতিক
-                                        </label>
-                                    </div>
-                                    <div class="checkbox checkbox-inline">
-                                        <label>
-                                            <input type="checkbox" name="optionsCheckboxes">রাজনীতি
-                                        </label>
-                                    </div>
+                                    {{/each}}
+                                    {{/each}}
                                     <span class="help-block">Error Message</span>
                                 </div>
                             </div>
