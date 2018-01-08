@@ -1,9 +1,9 @@
-<script>
+{{!-- <script>
     if(document.getElementById("check").checked){
         console.log("value is there ")
     }
 
-</script>
+</script> --}}
 <div class="content">
    
     <div class="container-fluid">
@@ -14,6 +14,13 @@
                         {{!-- {{#each sel_category}}
                         {{#each this}}
                             {{this.id}}
+                        {{/each}}
+                        {{/each}} --}}
+
+                        {{!-- {{#each a}}
+                        {{#each ../b}}
+                            {{this}} x {{../this}}
+                            </br>
                         {{/each}}
                         {{/each}} --}}
                         <div class="card-content">
@@ -31,17 +38,19 @@
                                 <label class="col-sm-2 label-on-left">বিভাগসমূহ</label>
                                 <div class="col-sm-10">
                                     {{#each category_list}}
-                                    {{#each this}}
                                         <div class="checkbox checkbox-inline">
                                             <label>
                                                 <input type="checkbox" name="optionsCheckboxes" id="check" value="{{ this.id }}"
-                                                 {{!-- {{#ifCond value '===' 1}} --}}
-                                                checked
-                                              
+                                                {{#each ../sel_category}}
+                                                     {{#ifCond ../this.id '===' this.id}}
+                                                        checked
+                                                    {{else}}
+                                                        
+                                                    {{/ifCond}}
+                                                {{/each}}
                                                 >{{this.name}} 
                                             </label>
                                         </div>
-                                    {{/each}}
                                     {{/each}}
                                     <span class="help-block">Error Message</span>
                                 </div>

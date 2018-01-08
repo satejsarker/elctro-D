@@ -16,12 +16,6 @@ connection.connect(function(err) {
 // res.render('index');
 // });
 /* GET home page. */
-
-router.get('/user', () => {
-    var value = 1;
-    res.render('pages/user', { value: value })
-})
-
 router.get('/', function(req, res, next) {
     connection.query('SELECT * FROM news INNER JOIN details ON news.id = details.news_id INNER JOIN users ON news.user_id = users.id', function(error, docs) {
         var chunk = [];
@@ -60,24 +54,20 @@ router.get('/news-update/:news', function(req, res, next) {
         // for (var i = 0; i < docs.length; i++) {
         //     chunk.push(docs.slice(i, i + chunksize));
         // }
-        var category = [];
-        var category_sel = [];
-
         connection.query('SELECT * FROM categories', function(error, categorylists) {
-                var catsize = 1;
-                for (var i = 0; i < categorylists.length; i++) {
-                    category.push(categorylists.slice(i, i + catsize));
-                }
+                // var catsize = 1;
+                // for (var i = 0; i < categorylists.length; i++) {
+                //     category.push(categorylists.slice(i, i + catsize));
+                // }
 
                 connection.query('SELECT * FROM category_news INNER JOIN categories ON category_news.category_id = categories.id WHERE category_news.news_id = ?', [id], function(error, category_docs) {
 
-                    if (error) throw error;
                     // var catsizes = 1;
                     // for (var i = 0; i < category_docs.length; i++) {
                     //     category_sel.push(category_docs.slice(i, i + catsizes));
                     // }
 
-                    console.log(category_docs[0].id);
+                    // console.log(category_sel);
                     // console.log(categoryl)
                     res.render('pages/update-news', {
                         title: 'News Update',
@@ -87,13 +77,13 @@ router.get('/news-update/:news', function(req, res, next) {
                         breaking_news: docs[0].breaking_news,
                         video: docs[0].video,
                         description: docs[0].description,
-                        category_list: category,
-                        value: category_docs[0].id
-                    });
-                });
-            });
+                        category_list: categorylists,
+                        sel_category: category_docs
+                    })
+                })
+            })
             // console.log(docs[0].headline)
-    });
+    })
 });
 
 
@@ -102,20 +92,19 @@ router.get('/news-update/:news', function(req, res, next) {
 // });
 
 router.get('/image-list', function(req, res, next) {
-    res.render('pages/image-list', { title: 'Express' });
+    res.render('pages/image-list', { title: 'Image List' });
 });
 
 router.get('/image-upload', function(req, res, next) {
-    res.render('pages/image-upload', { title: 'Express' });
+    res.render('pages/image-upload', { title: 'Image Upload' });
 });
 
 router.get('/statistics', function(req, res, next) {
-    res.render('pages/statistics', { title: 'Express' });
+    res.render('pages/statistics', { title: 'Statistics' });
 });
 
 router.get('/profile', function(req, res, next) {
-    var value = 1;
-    res.render('pages/profile', { title: 'Express', value: value });
+    res.render('pages/profile', { title: 'User Profile' });
 });
 
 // router.get('/ng', function(req, res) {
