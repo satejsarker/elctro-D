@@ -1,13 +1,28 @@
-<br><br><br><br><br><br><br>
 
-<br><br>
-<hr>
-<h2>
-    its test rest 
-</h2>
-<div ng-controller="AppCtrl">
-<input ngModel="test">{{test}}
-
+<div class="col-sm-12 text-center">
+    <h2>
+        its test rest
+    </h2>
+    <div {{#each value}}>
+        {{ this.headline }}
+    </div>
+    {{/each}}
+    <div class="form-control">
+    <form action="/test" method="POST" >
+    
+    
+            <input name="userName" type="text" required>
+    
+    
+            <input name="password" type="password" required>
+      <input type="submit" class="btn btn-success" value="submit">
+           
+    </form>
 </div>
+ 
+</div>
+
+
+<hr/>
 
 

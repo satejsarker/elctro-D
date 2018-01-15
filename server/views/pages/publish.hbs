@@ -22,7 +22,7 @@
                                     {{#each this}}
                                     <div class="checkbox checkbox-inline">
                                         <label>
-                                            <input type="checkbox" name="optionsCheckboxes" value="{{ this.id }}">{{this.name}}
+                                            <input type="checkbox" name="optionsCheckboxes[]" value="{{ this.id }}">{{this.name}}
                                         </label>
                                     </div>
                                     {{/each}}
@@ -36,12 +36,12 @@
                                     <div style="padding-top: 28px;">
                                         <div class="togglebutton">
                                             <label>
-                                                <input type="checkbox"> টপ নিউজ
+                                                <input name='newsT' type="checkbox"> টপ নিউজ
                                             </label>
                                         </div>
                                         <div class="togglebutton">
                                             <label>
-                                                <input type="checkbox"> ব্রেকিং নিউজ
+                                                <input name='newsT' type="checkbox"> ব্রেকিং নিউজ
                                             </label>
                                         </div>
                                         <span class="help-block">Error Message</span>
@@ -53,7 +53,7 @@
                                 <div class="col-sm-10">
                                     <div class="form-group label-floating is-empty">
                                         <label class="control-label"></label>
-                                        <input class="form-control" placeholder="ছবি যুক্ত করুন">
+                                        <input class="form-control" name='photo' placeholder="ছবি যুক্ত করুন">
                                     </div>
                                     <span class="help-block">Error Message</span>
                                 </div>
@@ -63,7 +63,7 @@
                                 <div class="col-sm-10">
                                     <div class="form-group label-floating is-empty">
                                         <label class="control-label"></label>
-                                        <textarea class="form-control" placeholder="সংক্ষিপ্ত বিবরণ লিখুন" style="vertical:none;" rows="3"></textarea>
+                                        <textarea name='hedline' class="form-control" placeholder="সংক্ষিপ্ত বিবরণ লিখুন" style="vertical:none;" rows="3"></textarea>
                                     </div>
                                     <span class="help-block">Error Message</span>
                                 </div>
@@ -73,7 +73,7 @@
                                 <div class="col-sm-10">
                                     <div class="form-group label-floating is-empty">
                                         <label class="control-label"></label>
-                                        <textarea class="form-control tinymce" placeholder="বিস্তারিত বর্ণনা লিখুন" style="vertical:none;"></textarea>
+                                        <textarea class="form-control tinymce" name="description" placeholder="বিস্তারিত বর্ণনা লিখুন" style="vertical:none;"></textarea>
                                     </div>
                                     <span class="help-block">Error Message</span>
                                 </div>

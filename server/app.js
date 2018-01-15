@@ -5,11 +5,22 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
+var session = require('express-session');
 var expressHbs = require('express-handlebars');
 var hbsHelpers = require('handlebars-helpers');
+var flash = require('connect-flash-plus');
+var moment = require('moment');
+
+moment.locale('bn')
+moment().format('LL');
+
 // var hbs = require('hbs');
 
 
+var DateFormats = {
+    short: "MMM Do YY",
+    long: 'h:mm a , Do MMMM , YYYY'
+};
 var Handlebars = require('handlebars');
 
 var hbs = expressHbs.create({
@@ -18,6 +29,16 @@ var hbs = expressHbs.create({
     partialsDir: path.join(__dirname, '/views/partials/'),
     defaultLayout: 'layout.hbs',
     helpers: {
+
+        formatDate: function(datetime, format) {
+            if (moment) {
+                // can use other formats like 'lll' too
+                format = DateFormats[format] || format;
+                return moment(datetime).format(format);
+            } else {
+                return datetime;
+            }
+        },
         ifCond: function(v1, operator, v2, options) {
 
             switch (operator) {
@@ -45,6 +66,7 @@ var hbs = expressHbs.create({
                     return options.inverse(this);
             }
         }
+
     }
 });
 
@@ -56,6 +78,7 @@ var hbs = expressHbs.create({
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var post = require('./routes/post');
 
 var app = express();
 
@@ -63,56 +86,33 @@ var app = express();
 app.engine('hbs', hbs.engine);
 
 
-// app.set('.hbs', expressHbs({
-//     defaultLayout: 'layout',
-//     extname: '.hbs',
-//     partialsDir: 'views/partials'
-// }));
+
 app.set('views', __dirname + '/views');
 app.set('view engine', '.hbs');
-// hbs.registerPartials(__dirname + '/views/partials');
-// app.enable('view cache');
+
 hbsHelpers.apply(hbs.handlebars, {});
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
 
 
-// Handlebars.registerHelper('ifCond', function(v1, operator, v2, options) {
 
-//     switch (operator) {
-//         case '==':
-//             return (v1 == v2) ? options.fn(this) : options.inverse(this);
-//         case '===':
-//             return (v1 === v2) ? options.fn(this) : options.inverse(this);
-//         case '!=':
-//             return (v1 != v2) ? options.fn(this) : options.inverse(this);
-//         case '!==':
-//             return (v1 !== v2) ? options.fn(this) : options.inverse(this);
-//         case '<':
-//             return (v1 < v2) ? options.fn(this) : options.inverse(this);
-//         case '<=':
-//             return (v1 <= v2) ? options.fn(this) : options.inverse(this);
-//         case '>':
-//             return (v1 > v2) ? options.fn(this) : options.inverse(this);
-//         case '>=':
-//             return (v1 >= v2) ? options.fn(this) : options.inverse(this);
-//         case '&&':
-//             return (v1 && v2) ? options.fn(this) : options.inverse(this);
-//         case '||':
-//             return (v1 || v2) ? options.fn(this) : options.inverse(this);
-//         default:
-//             return options.inverse(this);
-//     }
-// });
+app.use(session({
+    secret: 'keyboard cat',
+    cookie: { maxAge: 60000 }
+}));
+app.use(flash());
 
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/post', post);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -120,6 +120,8 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
+
+
 
 // error handler
 app.use(function(err, req, res, next) {

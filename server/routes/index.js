@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
+var sqlq = require('.././sql/sql');
+
+
 var connection = mysql.createConnection({
     host: "182.48.84.89",
     user: "dbcdb",
@@ -12,10 +15,40 @@ connection.connect(function(err) {
     console.log("Connected!");
 });
 
-// router.get('/',function(req,res,next){
-// res.render('index');
-// });
-/* GET home page. */
+
+
+
+
+
+
+router.route('/test').get(function(req, res, next) {
+    var newsid;
+    // connection.query("select * from news where id=? ",[id],function(err,doc){
+    //     console.log(doc);
+    // })
+    sqlq.sqlid().then(function(id) {
+        console.log(id);
+        newsid = id;
+
+        connection.query("select * from news where id=? ", [id], function(err, doc) {
+            console.log(doc);
+            res.render('hello', {
+                value: doc
+            })
+        })
+    })
+}).post(function(req, res, next) {
+    req.flash('info', 'Flash is back!')
+    var user = { name: req.body.userName, password: req.body.password }
+    connection.query("insert into user set?", user, function(err, doc) {
+        if (err) throw err;
+    })
+    res.redirect('/');
+})
+
+
+
+
 router.get('/', function(req, res, next) {
     connection.query('SELECT * FROM news INNER JOIN details ON news.id = details.news_id INNER JOIN users ON news.user_id = users.id', function(error, docs) {
         var chunk = [];
@@ -23,9 +56,11 @@ router.get('/', function(req, res, next) {
         for (var i = 0; i < docs.length; i++) {
             chunk.push(docs.slice(i, i + chunksize));
         }
+        console.log(req.flash('info'));
         res.render('pages/dashboard.hbs', {
             title: 'News List',
-            news: chunk
+            news: chunk,
+            info: req.flash('info')
         })
     })
 });
