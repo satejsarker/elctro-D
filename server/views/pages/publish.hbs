@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <form method="post" action="#" class="form-horizontal">
+                    <form method="post" action="/post/publish" class="form-horizontal">
                         <div class="card-content">
                             <div class="row">
                                 <label class="col-sm-2 label-on-left">শিরোনাম</label>
@@ -27,7 +27,11 @@
                                     </div>
                                     {{/each}}
                                     {{/each}}
-                                    <span class="help-block">Error Message</span>
+                                     {{#if message}}
+                                    <span class="help-block bg-danger">
+                                        <strong>{{message}}</strong>
+                                    </span>
+                                    {{/if}}
                                 </div>
                             </div>
                             <div class="row">

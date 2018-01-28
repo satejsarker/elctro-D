@@ -1,46 +1,43 @@
-{{!-- <script>
-    if(document.getElementById("check").checked){
-        console.log("value is there ")
-    }
+<script>
+    function a(){
+      alert('sub');
+      
 
-</script> --}}
+    }
+   
+</script>
 <div class="content">
+   
    
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <form method="post" action="#" class="form-horizontal">
-                        {{!-- {{#each sel_category}}
-                        {{#each this}}
-                            {{this.id}}
-                        {{/each}}
-                        {{/each}} --}}
-
-                        {{!-- {{#each a}}
-                        {{#each ../b}}
-                            {{this}} x {{../this}}
-                            </br>
-                        {{/each}}
-                        {{/each}} --}}
+                    <form method="post" action="/news-update/{{id}}" class="form-horizontal">
+                    <input type="hidden" name="id" value="{{id}}">
                         <div class="card-content">
                             <div class="row">
                                 <label class="col-sm-2 label-on-left">শিরোনাম</label>
                                 <div class="col-sm-10">
                                     <div class="form-group label-floating is-empty">
                                         <label class="control-label"></label>
-                                        <input type="text" class="form-control" placeholder="সুন্দর শিরোনাম লিখুন" value="{{headline}}">
+                                        <input type="text" name="headline" class="form-control" placeholder="সুন্দর শিরোনাম লিখুন" value="{{headline}}">
                                     </div>
                                     <span class="help-block">Error Message</span>
                                 </div>
                             </div>
                             <div class="row">
                                 <label class="col-sm-2 label-on-left">বিভাগসমূহ</label>
+                                {{!-- {{#if message}}
+                                <span class="bg-danger">
+                                    {{message}}
+                                </span>
+                                {{/if}} --}}
                                 <div class="col-sm-10">
                                     {{#each category_list}}
                                         <div class="checkbox checkbox-inline">
                                             <label>
-                                                <input type="checkbox" name="optionsCheckboxes" id="check" value="{{ this.id }}"
+                                                <input type="checkbox"  id="catagory" name="optionsCheckboxes[]" id="check" value="{{ this.id }}"
                                                 {{#each ../sel_category}}
                                                      {{#ifCond ../this.id '===' this.id}}
                                                         checked
@@ -52,7 +49,9 @@
                                             </label>
                                         </div>
                                     {{/each}}
-                                    <span class="help-block">Error Message</span>
+                                     {{#if message}}
+                                    <span class="help-block bg-danger"><strong>{{message}}</strong></span>
+                                    {{/if}}
                                 </div>
                             </div>
                             <div class="row">
@@ -61,7 +60,7 @@
                                     <div style="padding-top: 28px;">
                                         <div class="togglebutton">
                                             <label>
-                                                <input type="checkbox"
+                                                <input type="checkbox" name="newsT"
                                                 {{#if this.top_news}}
                                                     checked
                                                 {{else}}
@@ -110,7 +109,7 @@
                                 <div class="col-sm-10">
                                     <div class="form-group label-floating is-empty">
                                         <label class="control-label"></label>
-                                        <textarea class="form-control tinymce" placeholder="বিস্তারিত বর্ণনা লিখুন" style="vertical:none;">{{{this.description}}}</textarea>
+                                        <textarea class="form-control tinymce" name="description" placeholder="বিস্তারিত বর্ণনা লিখুন" style="vertical:none;">{{{this.description}}}</textarea>
                                     </div>
                                     <span class="help-block">Error Message</span>
                                 </div>
@@ -128,7 +127,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-10 col-sm-offset-2">
-                                    <button class="btn btn-block btn-success" type="submit">Post News</button>
+                                    <button class="btn btn-block btn-success"  type="submit">Update  News</button>
                                 </div>
                             </div>
                         </div>

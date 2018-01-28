@@ -1,12 +1,6 @@
 
      
 <div class="content">
-    <div> hello {{#if info}}
-    
-        <p>{{info}}</p>
-        {{/if}}
-    </div>
-
 
     <div class="container-fluid">
         <div class="row">
@@ -37,13 +31,14 @@
                                 </tfoot>
                                 <tbody>
                                     {{#each news}}
-                                    {{#each this}}
                                     <tr>
                                         <td>{{ this.news_id}}</td>
                                         <td>{{this.headline}}</td>
                                         <td><button class="btn btn-default"><i class="material-icons">link</i></button></td>
                                         <td>{{ this.name }}</td>
-                                        <td>{{formatDate   this.created_at "long"}}</td>
+                                        <td>{{formatDate   this.created_at 'long'}}</td>
+                                       {{!-- <td>{{moment date=this.created_at  local=true }}</td>   --}}
+                                       
                                         <td class="text-right">
                                             <a href="/news-update/{{this.news_id}}" class="btn btn-simple btn-info btn-icon like">
                                                 <i class="material-icons">border_color</i>
@@ -51,12 +46,11 @@
                                             <a href="#" class="btn btn-simple btn-warning btn-icon edit">
                                                 <i class="material-icons">dvr</i>
                                             </a>
-                                            <a href="#" class="btn btn-simple btn-danger btn-icon remove">
+                                            <a href="/delete/{{this.news_id}}" class="btn btn-simple btn-danger btn-icon remove">
                                                 <i class="material-icons">close</i>
                                             </a>
                                         </td>
                                     </tr>
-                                    {{/each}}
                                     {{/each}}
                                 </tbody>
                             </table>

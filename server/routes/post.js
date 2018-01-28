@@ -24,7 +24,7 @@ var connection = mysql.createConnection({
     database: "content_manager"
 });
 
-router.route('/jd')
+router.route('/publish')
 
 .get(function(req, res, next) {
 
@@ -37,16 +37,12 @@ router.route('/jd')
 
         res.render('pages/publish.hbs', {
             title: 'New News Create',
-            category: chunk
+            category: chunk,
+            message: req.flash('catagory')
         })
     })
-})
+}).post(function(req, res, next) {
 
-.post(function(req, res, next) {
-
-
-
-    var slug = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     var news = {
         top_news: Boolean(req.body.newsT),
         headline: req.body.hedline,
@@ -63,7 +59,8 @@ router.route('/jd')
             console.log(doc);
         }
     })
-
+    console.log(date.format(now, 'YYYY/MM/DD HH:mm:ss'));
+;
     sqlq.sqlid().then(function(id) {
         console.log(id);
         var details = {
@@ -77,7 +74,6 @@ router.route('/jd')
         connection.query("insert into details set?", [details], function(err, doc) {
             if (err) throw err;
             else {
-                res.redirect('/');
                 console.log(doc);
             }
 
@@ -85,23 +81,45 @@ router.route('/jd')
 
         var array = []
         var select = req.param('optionsCheckboxes');
+        if (select) {
+            var values = [];
+
+            for (var i = 0; i < select.length; i++)
+                values.push([id, select[i]]);
+
+            console.log(values);
+            // var stringObj = JSON.stringify(select);
+            connection.query('INSERT INTO category_news (news_id, category_id) VALUES ?', [values], function(err, result) {
+                if (err) {
+                    throw err;
+                }
+            });
+        } else {
+            req.flash('catagory', 'Catagory have to select');
+            res.redirect('/post/publish');
+        }
 
 
-        var values = [];
-
-        for (var i = 0; i < select.length; i++)
-            values.push([id, select[i]]);
-
-        console.log(values);
-        // var stringObj = JSON.stringify(select);
-        connection.query('INSERT INTO category_news (news_id, category_id) VALUES ?', [values], function(err, result) {
-            if (err) {
-                res.send('Error');
-            } 
-        });
     })
-
+    res.redirect('/')
 })
+
+router.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/users/');
+});
+
+
+// route middleware to make sure
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
 
 
 
