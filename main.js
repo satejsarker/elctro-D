@@ -38,7 +38,7 @@ function createWindow() {
 
 
     // and load the index.html of the app.
-    mainWindow.loadURL('http://localhost:4001/');
+    mainWindow.loadURL('http://localhost:4001/users');
     mainWindow.focus();
 
 

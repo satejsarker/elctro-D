@@ -32,7 +32,7 @@
                                 <tbody>
                                     {{#each news}}
                                     <tr>
-                                        <td>{{ this.news_id}}</td>
+                                        <td>{{ this.id}}</td>
                                         <td>{{this.headline}}</td>
                                         <td><button class="btn btn-default"><i class="material-icons">link</i></button></td>
                                         <td>{{ this.name }}</td>
@@ -40,13 +40,13 @@
                                        {{!-- <td>{{moment date=this.created_at  local=true }}</td>   --}}
                                        
                                         <td class="text-right">
-                                            <a href="/news-update/{{this.news_id}}" class="btn btn-simple btn-info btn-icon like">
+                                            <a href="/news-update/{{this.id}}" class="btn btn-simple btn-info btn-icon like">
                                                 <i class="material-icons">border_color</i>
                                             </a>
                                             <a href="#" class="btn btn-simple btn-warning btn-icon edit">
                                                 <i class="material-icons">dvr</i>
                                             </a>
-                                            <a href="/delete/{{this.news_id}}" class="btn btn-simple btn-danger btn-icon remove">
+                                            <a href="/delete/{{this.id}}" class="btn btn-simple btn-danger btn-icon remove">
                                                 <i class="material-icons">close</i>
                                             </a>
                                         </td>

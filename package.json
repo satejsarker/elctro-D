@@ -4,7 +4,8 @@
   "description": "this applicaiton is created and maintain by dbc news 24/7",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-packager . --out=dist/win --platform=win32 --arch=x64 --icon=/server/public/images/icon.png --asar=true --overwrite"
   },
   "repository": "https://github.com/satejsarker/elctro-D.git",
   "keywords": [
@@ -17,8 +18,10 @@
     "handlebars-helper-asset": "^0.1.0"
   },
   "dependencies": {
+    "electron-packager": "^10.1.2",
     "electron-squirrel-startup": "^1.0.0",
     "electron-winstaller": "^2.6.3",
+    "g": "^2.0.1",
     "jquery": "^3.2.1",
     "mysql": "^2.15.0"
   }
