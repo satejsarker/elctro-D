@@ -1,11 +1,11 @@
-var myApp = angular.module('myApp', ['infinite-scroll']);
-myApp.controller('DemoController', function($scope) {
-    $scope.images = [1, 2, 3, 4, 5, 6, 7, 8];
-
-    $scope.loadMore = function() {
-        var last = $scope.images[$scope.images.length - 1];
-        for (var i = 1; i <= 8; i++) {
-            $scope.images.push(last + i);
-        }
-    };
-});
+$(document).ready(function() {
+    $(document).mousemove(function(event) {
+        TweenLite.to($("body"), 
+        .5, {
+            css: {
+                backgroundPosition: "" + parseInt(event.pageX / 8) + "px " + parseInt(event.pageY / '12') + "px, " + parseInt(event.pageX / '15') + "px " + parseInt(event.pageY / '15') + "px, " + parseInt(event.pageX / '30') + "px " + parseInt(event.pageY / '30') + "px",
+            	"background-position": parseInt(event.pageX / 8) + "px " + parseInt(event.pageY / 12) + "px, " + parseInt(event.pageX / 15) + "px " + parseInt(event.pageY / 15) + "px, " + parseInt(event.pageX / 30) + "px " + parseInt(event.pageY / 30) + "px"
+            }
+        })
+    })
+})

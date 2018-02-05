@@ -9,7 +9,7 @@ var passport = require('passport');
 // HOME PAGE (with login links) ========
 // =====================================
 router.get('/', function(req, res) {
-    res.render('pages/login/login.hbs');
+    res.render('pages/login/login.hbs',{layout:false});
 });
 
 // =====================================
@@ -19,12 +19,12 @@ router.get('/', function(req, res) {
 router.get('/login', function(req, res) {
 
     // render the page and pass in any flash data if it exists
-    res.render('pages/login/signin.hbs', { message: req.flash('loginMessage'), });
+    res.render('pages/login/signin.hbs', { message: req.flash('loginMessage'),layout:false });
 });
 
 // process the login form
 router.post('/login', passport.authenticate('local-login', {
-        successRedirect: '/users/profile', // redirect to the secure profile section
+        successRedirect: '/', // redirect to the secure profile section
         failureRedirect: '/users/login', // redirect back to the signup page if there is an error
         failureFlash: { type: 'loginMessage' } // allow flash messages
     }),
@@ -61,7 +61,7 @@ router.post('/signup', passport.authenticate('local-signup', {
 // we will want this protected so you have to be logged in to visit
 // we will use route middleware to verify this (the isLoggedIn function)
 router.get('/profile', isLoggedIn, function(req, res) {
-    res.render('pages/login/profile.hbs', {
+    res.render('pages/profile.hbs', {
         user: req.user // get the user out of session and pass to template
     });
 });
@@ -71,7 +71,7 @@ router.get('/profile', isLoggedIn, function(req, res) {
 // =====================================
 router.get('/logout', function(req, res) {
     req.logout();
-    res.redirect('/users/');
+    res.redirect('/users/login');
 });
 
 

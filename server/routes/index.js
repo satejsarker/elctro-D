@@ -53,11 +53,12 @@ router.route('/test').get(function(req, res, next) {
 
 router.get('/', function(req, res, next) {
     connection.query('SELECT news.*, users.name FROM news INNER JOIN details ON news.id = details.news_id INNER JOIN users ON news.user_id = users.id', function(error, docs) {
-        console.log(docs[1].created_at)
+       console.log(JSON.stringify (req.user));
         res.render('pages/dashboard.hbs', {
             title: 'News List',
             news: docs,
-            info: req.flash('info')
+            info: req.flash('info'),
+            user:req.user
         })
     })
 });
@@ -140,6 +141,15 @@ router.get('/delete/:id', (req, res) => {
             res.redirect('/');
         }
     })
+})
+router.get('/activate/:id',(req,res)=>{
+    var id=req.params.id;
+    connection.query('update news set active=1 where id=?',id,function (err,doc) {
+                        if(err) throw err;
+                        else{
+                            res.redirect('/');
+                        }    
+                    })
 })
 
 

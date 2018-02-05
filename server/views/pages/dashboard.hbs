@@ -31,6 +31,7 @@
                                 </tfoot>
                                 <tbody>
                                     {{#each news}}
+                                    
                                     <tr>
                                         <td>{{ this.id}}</td>
                                         <td>{{this.headline}}</td>
@@ -46,9 +47,16 @@
                                             <a href="#" class="btn btn-simple btn-warning btn-icon edit">
                                                 <i class="material-icons">dvr</i>
                                             </a>
+                                            <div "name":"Admin"  {{#ifCond  ../user.id '===' 14}}>
                                             <a href="/delete/{{this.id}}" class="btn btn-simple btn-danger btn-icon remove">
-                                                <i class="material-icons">close</i>
+                                                <i class="material-icons">close</i>                                                
                                             </a>
+                                            <a href="/activate/{{this.id}}" class="btn btn-simple btn-danger btn-icon check">
+                                                <i class="material-icons" style="background-color:green">check</i>
+                                            </a>
+                                            </div>
+                                            {{/ifCond}}
+                                            
                                         </td>
                                     </tr>
                                     {{/each}}
