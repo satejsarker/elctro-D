@@ -1,4 +1,5 @@
 const electron = require('electron')
+
     // Module to control application life.
 const app = electron.app;
 const jqury=require('jquery');
@@ -33,16 +34,20 @@ function createWindow() {
         autoHideMenuBar: true,
         useContentSize: true,
         resizable: true,
+        webPreferences: {
+            devTools: false
+            },
         icon:__dirname+'/server/public/images/icon.png'
     });
 
 
     // and load the index.html of the app.
-    mainWindow.loadURL('http://localhost:4001/users');
+    mainWindow.loadURL('http://localhost:4001/users/login/');
     mainWindow.focus();
+    // mainWindow.webContents.on("devtools-opened", () => { mainWindow.webContents.closeDevTools(); });
 
 
-    // NODE Server Link 
+    // NODE Server Link
 
 
     // Open the DevTools.

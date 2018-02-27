@@ -5,46 +5,25 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-content">
+                       
                         <div class="row">
-                            <div class="col-sm-3">
-                                <legend>Regular Image</legend>
+                             {{#each images}}
+                            <div class="col-sm-6">
+                               
+                                <legend>{{this.id}}</legend>
                                 <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                    <input type="text" value="{{this.photo}}" class="form-control">
                                     <div class="fileinput-new thumbnail">
-                                        <img src="/assets/img/image_placeholder.jpg" alt="...">
+                                        <img src="{{this.photo}}" alt="...">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
-                                <legend>Regular Image</legend>
-                                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                    <div class="fileinput-new thumbnail">
-                                        <img src="/assets/img/image_placeholder.jpg" alt="...">
-                                    </div>
-                                </div>
+                            {{/each}}
+                          
                             </div>
-                            <div class="col-sm-3">
-                                <legend>Regular Image</legend>
-                                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                    <div class="fileinput-new thumbnail">
-                                        <img src="/assets/img/image_placeholder.jpg" alt="...">
-                                    </div>
-                                </div>
+                           
                             </div>
-                            <div class="col-sm-3">
-                                <legend>Regular Image</legend>
-                                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                    <div class="fileinput-new thumbnail">
-                                        <img src="/assets/img/image_placeholder.jpg" alt="...">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <legend>Regular Image</legend>
-                                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                    <div class="fileinput-new thumbnail">
-                                        <img src="/assets/img/image_placeholder.jpg" alt="...">
-                                    </div>
-                                </div>
+                           
                             </div>
                         </div>
                     </div>

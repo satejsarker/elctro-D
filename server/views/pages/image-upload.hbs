@@ -1,36 +1,115 @@
-<div class="content">
-    <div class="container-fluid">
+<html lang="en">
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="row">
-                            <div class="text-center">
-                                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                    <div class="fileinput-new thumbnail">
-                                        <img src="/assets/img/image_placeholder.jpg" alt="...">
+<head>
+    <title>Upload</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        .btn-file {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+        
+        #img-upload{
+            display: block;
+            width: 240px;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Image Upload</h2>
+        <form class="form-horizontal" action="http://172.31.41.4:8000/images/upload" method="POST"  enctype="multipart/form-data">
+            
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="image_name">Image Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="image_name" name="image_name" placeholder="Enter image name (optional)">
                                     </div>
-                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                                    <div>
-                                        <span class="btn btn-round btn-file">
-                                            <span class="fileinput-new">Select image</span>
-                                            <span class="fileinput-exists">Change</span>
-                                            <input type="file" name="..." />
-                                        </span>
-                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput">
-                                            <i class="fa fa-times"></i> Remove</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row text-center">
-                            <button type="submit" class="btn btn-success">Upload</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- end card -->
             </div>
-        </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="image_file">Image File:</label>
+                <div class="col-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <span class="btn btn-default btn-file">
+                                Browse (Select Image File) <input type="file" id="imgInp" accept="image/*">
+                            </span>
+                        </span>
+                        <input type="text" class="form-control" readonly>
+                    </div>
+                    <img id='img-upload'/>
+                    <input type="hidden" name="image_base" id='img-upload-text'/>
+                                    </div>
+                
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </div>
+            </div>
+        </form>
     </div>
-</div>
+
+<script>
+    $(document).ready( function() {
+        $(document).on('change', '.btn-file :file', function() {
+        var input = $(this),
+            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        input.trigger('fileselect', [label]);
+        });
+
+        $('.btn-file :file').on('fileselect', function(event, label) {
+            
+            var input = $(this).parents('.input-group').find(':text'),
+                log = label;
+            
+            if( input.length ) {
+                input.val(log);
+            } else {
+                if( log ) alert(log);
+            }
+        
+        });
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                    $('#img-upload').attr('src', e.target.result);
+                    $('#img-upload-text').attr('value', e.target.result);
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgInp").change(function(){
+            readURL(this);
+        }); 	
+    });
+</script>
+</body>
+
+</html>

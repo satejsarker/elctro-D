@@ -1,38 +1,38 @@
 <div class="sidebar">
-    <div class="logo">
-        <a href="#" class="simple-text">
-            DBC Admin
+    <div class="logo" style="background-color: #C82027">
+        <a href="/" class="simple-text"  >
+            <p style="color:aliceblue">DBC Admin</p>
         </a>
     </div>
-    <div class="logo logo-mini">
+    <div class="logo logo-mini" style="background-color: #C82027" >
         <a href="#" class="simple-text">
-            D
+           <p style="color:aliceblue">DBC</p> 
         </a>
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
-            <li>
+            {{!-- <li>
                 <a href="/statistics">
-                    <i class="material-icons">assessment</i>
+                    <i class="material-icons" style="color:#C82027">assessment</i>
                     <p>Statistics</p>
                 </a>
-            </li>
+            </li> --}}
             <li class="active">
                 <a href="/">
-                    <i class="material-icons">dashboard</i>
+                    <i class="material-icons" style="color:#C82027">dashboard</i>
                     <p>Dashboard</p>
                 </a>
             </li>
             <li>
                 <a href="/post/publish">
-                    <i class="material-icons">create</i>
+                    <i class="material-icons" style="color:#C82027">create</i>
                     <p>Publish New News</p>
                 </a>
 
             </li>
             <li>
                 <a data-toggle="collapse" href="#news" class="collapsed" aria-expanded="false">
-                    <i class="material-icons">featured_play_list</i>
+                    <i class="material-icons" style="color:#C82027">featured_play_list</i>
                     <p>News
                         <b class="caret"></b>
                     </p>
@@ -50,7 +50,7 @@
             </li>
             <li>
                 <a data-toggle="collapse" href="#images" class="collapsed" aria-expanded="false">
-                    <i class="material-icons">photo_library</i>
+                    <i class="material-icons" style="color:#C82027">photo_library</i>
                     <p>Images
                         <b class="caret"></b>
                     </p>
@@ -58,7 +58,7 @@
                 <div class="collapse" id="images" aria-expanded="false" style="height: 0px;">
                     <ul class="nav">
                         <li>
-                            <a href="/image-list">Images List</a>
+                            <a href="/image/all" >Images List</a>
                         </li>
                         <li>
                             <a href="/image-upload">Upload New Images</a>
@@ -68,7 +68,7 @@
             </li>
             <li>
                 <a data-toggle="collapse" href="#auth" class="collapsed" aria-expanded="false">
-                    <i class="material-icons">people_outline</i>
+                    <i class="material-icons" style="color:#C82027">people_outline</i>
                     <p>User
                         <b class="caret"></b>
                     </p>
@@ -76,7 +76,7 @@
                 <div class="collapse" id="auth" aria-expanded="false" style="height: 0px;">
                     <ul class="nav">
                         <li>
-                            <a href="/profile">My Profile</a>
+                            <a href="/users/profile">My Profile</a>
                         </li>
                         <li>
                             <a href="/register">Register New User</a>
@@ -85,9 +85,13 @@
                 </div>
             </li>
             <li>
-                <a href="#">
-                    <i class="material-icons">library_books</i>
+                {{!-- <a href="#">
+                    <i class="material-icons" style="color:#C82027">library_books</i>
                     <p>About Admin panel </p>
+                </a> --}}
+                <a href="/post/draft">
+                    <i class="material-icons" style="color:#C82027">assignment</i>
+                    <p>Draft</p>
                 </a>
             </li>
         </ul>

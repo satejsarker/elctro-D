@@ -1,9 +1,11 @@
 <div class="content">
+    <p>{{user.id}}</p>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <form method="post" action="/post/publish" class="form-horizontal">
+                    <form method="post"  class="form-horizontal">
+                        <input type="hidden" value="{{user.id}}" name="user_id">
                         <div class="card-content">
                             <div class="row">
                                 <label class="col-sm-2 label-on-left">শিরোনাম</label>
@@ -12,7 +14,7 @@
                                         <label class="control-label"></label>
                                         <input type="text" class="form-control" placeholder="সুন্দর শিরোনাম লিখুন">
                                     </div>
-                                    <span class="help-block">Error Message</span>
+                                    {{!-- <span class="help-block">Error Message</span> --}}
                                 </div>
                             </div>
                             <div class="row">
@@ -48,7 +50,7 @@
                                                 <input name='newsT' type="checkbox"> ব্রেকিং নিউজ
                                             </label>
                                         </div>
-                                        <span class="help-block">Error Message</span>
+                                        {{!-- <span class="help-block">Error Message</span> --}}
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +61,9 @@
                                         <label class="control-label"></label>
                                         <input class="form-control" name='photo' placeholder="ছবি যুক্ত করুন">
                                     </div>
-                                    <span class="help-block">Error Message</span>
+                                   <button class="btn" ><a href="/image/all"  target="_blank" style="color: #C82027">Images List</a></button> 
+                                   <button class="btn" ><a href="/image-upload"  target="_blank" style="color: #C82027">Images Upload</a></button> 
+                                    {{!-- <span class="help-block">Error Message</span> --}}
                                 </div>
                             </div>
                             <div class="row">
@@ -69,7 +73,10 @@
                                         <label class="control-label"></label>
                                         <textarea name='hedline' class="form-control" placeholder="সংক্ষিপ্ত বিবরণ লিখুন" style="vertical:none;" rows="3"></textarea>
                                     </div>
-                                    <span class="help-block">Error Message</span>
+                                    {{#if hedMessage}}
+                                    <span class="help-block bg-danger" focus><strong>{{hedMessage}}</strong></span>
+                                    {{/if}}
+                                </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -79,10 +86,11 @@
                                         <label class="control-label"></label>
                                         <textarea class="form-control tinymce" name="description" placeholder="বিস্তারিত বর্ণনা লিখুন" style="vertical:none;"></textarea>
                                     </div>
-                                    <span class="help-block">Error Message</span>
+                                    {{!-- <span class="help-block">Error Message</span> --}}
                                 </div>
                             </div>
                             <div class="row">
+                                
                                 <label class="col-sm-2 label-on-left">ট্যাগসমূহ</label>
                                 <div class="col-sm-10">
                                     <div class="form-group label-floating is-empty">
@@ -94,8 +102,12 @@
                                 </div>
                             </div>
                             <div class="row">
+                                
                                 <div class="col-sm-10 col-sm-offset-2">
-                                    <button class="btn btn-block btn-success" type="submit">Post News</button>
+                                    <button class="btn btn-block btn-basic " formaction="/post/draft" type="submit">Save Draft</button>
+                                </div>
+                                <div class="col-sm-10 col-sm-offset-2">
+                                    <button class="btn btn-block btn-success" formaction="/post/publish" type="submit">Post News</button>
                                 </div>
                             </div>
                         </div>

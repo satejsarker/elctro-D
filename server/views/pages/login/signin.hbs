@@ -234,6 +234,16 @@ body {
 
 <body>
      <div class="wrapper">
+           <div class="col-sm-4 col-sm-offset-4">
+          
+
+            <!-- show any messages that come back with authentication -->
+             {{#if message}}
+            <div class="alert " role="alert">
+                
+                {{message}}
+            </div>
+ {{/if}}
     <div class="container">
         <div class="stencil">
             <div class="line">
@@ -260,18 +270,9 @@ body {
             </div>
         </form>    
     </div>
+   
 </div>
- <div class="col-sm-6 col-sm-offset-3">
-            <h1>
-                <span class="fa fa-sign-in btn"></span> Login</h1>
 
-            <!-- show any messages that come back with authentication -->
-             {{#if message}}
-            <div class="alert " role="alert">
-                
-                {{message}}
-            </div>
- {{/if}}
      
 
 </body>

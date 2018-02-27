@@ -14,6 +14,7 @@ var moment = require('moment');
 var passport = require('passport');
 var flash = require('connect-flash');
 
+
 require('./config/passport')(passport);
 
 
@@ -85,6 +86,7 @@ var hbs = expressHbs.create({
 var index = require('./routes/index');
 var users = require('./routes/users');
 var post = require('./routes/post');
+var image =require('./routes/image');
 
 
 
@@ -126,6 +128,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/post', post);
+app.use('/image',image);
 
 
 

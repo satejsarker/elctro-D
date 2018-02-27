@@ -53,7 +53,7 @@
                                                         </p>
                                                     </div>
                                                     <div class="col-sm-6 p-10 p-5">
-                                                        <p>Online Reporter</p>
+                                                        <p>{{user.designation}}</p>
                                                         <p>News Room</p>
                                                         <p>Bangladesh</p>
                                                         <p>15/01/1982</p>
@@ -72,40 +72,14 @@
                                                             <i class="zmdi zmdi-account"></i>Skype</p>
                                                     </div>
                                                     <div class="col-sm-6 p-10">
-                                                        <p>+1 (612) 999 99999</p>
-                                                        <p>reporter@dbcnews.tv</p>
-                                                        <p>reporter.skype</p>
+                                                        <p>{{user.phone}}</p>
+                                                        <p>{{user.email}}</p>
+                                                        <p>{{user.username}}</p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <div class="p-15">
-                                                <h4>Last Added News</h4>
-                                                <hr>
-                                                <p>
-                                                    <Strong>This is first news</strong>
-                                                </p>
-                                                <p>
-                                                    <Strong>This is first news</strong>
-                                                </p>
-                                                <p>
-                                                    <Strong>This is first news</strong>
-                                                </p>
-                                                <p>
-                                                    <Strong>This is first news</strong>
-                                                </p>
-                                                <p>
-                                                    <Strong>This is first news</strong>
-                                                </p>
-                                                <p>
-                                                    <Strong>This is first news</strong>
-                                                </p>
-                                                <p>
-                                                    <Strong>This is first news</strong>
-                                                </p>
-                                            </div>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="activities11">
@@ -239,12 +213,11 @@
                     </div>
                     <div class="card-content">
                         <h6 class="category text-gray">Online Reporter</h6>
-                        <h4 class="card-title">Mr Reporter</h4>
+                        <h4 class="card-title">{{user.username}}</h4>
                         <p class="description">
                             Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye
                             I love Rick Owens’ bed design but the back is...
                         </p>
-                        <a href="#pablo" class="btn btn-rose btn-round">Follow</a>
                     </div>
                 </div>
             </div>

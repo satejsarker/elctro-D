@@ -2,7 +2,6 @@
 
 
 <div class="content">
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -33,7 +32,9 @@
                                 </tfoot>
                                 <tbody>
                                     {{#each news}}
-                                    {{#ifCond this.draft "!==" 1}}
+                                     
+                                    {{#ifCond this.draft "===" 1}}
+                                   {{#ifCond  ../user.id '==='this.user_id}}
                                     <tr>
                                         <td>{{ this.id}}</td>
                                         <td>{{this.headline}}</td>
@@ -50,12 +51,12 @@
                                             <a href="/news-update/{{this.id}}" class="btn btn-simple btn-info btn-icon like">
                                                 <i class="material-icons">border_color</i>
                                             </a>
-                                            {{#ifCond  ../user.id '===' 5}}
-                                            <a href="/activate/{{this.id}}" class="btn btn-simple btn-danger btn-icon check">
+                                            {{#ifCond  ../user.id '==='this.user_id}}
+                                            <a href="/notdraft/{{this.id}}" class="btn btn-simple btn-danger btn-icon check">
                                                 <i class="material-icons" style="color:green">check</i>
                                             </a>
-                                             <a href="/disactivate/{{this.id}}" class="btn btn-simple btn-danger btn-icon check">
-                                              <i class="material-icons">indeterminate_check_box</i>
+                                             {{!-- <a href="/disactivate/{{this.id}}" class="btn btn-simple btn-danger btn-icon check"> --}}
+                                              {{!-- <i class="material-icons">indeterminate_check_box</i> --}}
                                               <a href="/delete/{{this.id}}"  title="Be careful!!!" class="btn btn-simple btn-danger btn-icon remove">
                                                 <i class="material-icons">close</i>                                                
                                             </a>
@@ -65,6 +66,7 @@
                                         </td>
                                     </tr>
                                     {{/ifCond}}
+                                      {{/ifCond}}
                                     {{/each}}
                                 </tbody>
                             </table>

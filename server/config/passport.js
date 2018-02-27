@@ -8,7 +8,7 @@ var connection = mysql.createConnection({
     host: "182.48.84.89",
     user: "dbcdb",
     password: "DbcGrand@2018",
-    database: "my_schema"
+    database: "content_manager"
 });
 
 // connection.query('USE ' + dbconfig.database);
@@ -49,7 +49,7 @@ module.exports = function(passport) {
             },
             function(req, username, password, done) {
             var id;
-                if (req.body == " ") {
+                if (req.body ===" ") {
                     return done(null, false, req.flash('signupMessage', 'its cant be empty '));
                 } else {
                     // find a user whose email is the same as the forms email
@@ -63,17 +63,22 @@ module.exports = function(passport) {
                             // if there is no user with that username
                             // create the user
                             var newUserMysql = {
-                                id:id,
                                 username: username,
                                 password: bcrypt.hashSync(password, null, null),
-                                mobile:req.body.mobile ,
-                                job_id:req.body.job_id
+                               phone:req.body.phone ,
+                                email:req.body.email,
+                                bn_name:req.body.bn_name,
+                                area_name:req.body.area_name,
+                                designation:req.body.designation
+
                                 // use the generateHash function in our user model
                             };
 
-                            var insertQuery = "INSERT INTO users ( username, password ,mobile,job_id) values (?,?,?,?)";
+                            var insertQuery = "INSERT INTO users (username,password,email,phone,bn_name,area_name,designation) values (?,?,?,?,?,?,?)";
 
-                            connection.query(insertQuery, [newUserMysql.username, newUserMysql.password,newUserMysql.mobile,newUserMysql.job_id], function(err, rows) {
+                            connection.query(insertQuery, [newUserMysql.username, newUserMysql.password,newUserMysql.email,newUserMysql.phone,
+                                newUserMysql.bn_name,newUserMysql.area_name,newUserMysql.designation
+                            ], function(err, rows) {
                                 if(err) throw err;
 
                         

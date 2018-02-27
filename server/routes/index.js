@@ -51,8 +51,8 @@ router.route('/test').get(function(req, res, next) {
 
 
 
-router.get('/', function(req, res, next) {
-    connection.query('SELECT news.*, users.name FROM news INNER JOIN details ON news.id = details.news_id INNER JOIN users ON news.user_id = users.id', function(error, docs) {
+router.get('/',isLoggedIn, function(req, res, next) {
+    connection.query('SELECT news.*, users.username FROM news  INNER JOIN details ON news.id = details.news_id INNER JOIN users ON news.user_id = users.id', function(error, docs) {
        console.log(JSON.stringify (req.user));
         res.render('pages/dashboard.hbs', {
             title: 'News List',
@@ -65,7 +65,7 @@ router.get('/', function(req, res, next) {
 
 
 
-router.route('/news-update/:news').get(function(req, res, next) {
+router.route('/news-update/:news').get(isLoggedIn,function(req, res, next) {
     var id = req.params.news;
 
     connection.query('SELECT * FROM news INNER JOIN details ON news.id = details.news_id WHERE news.id = ?', [id], function(error, docs) {
@@ -126,12 +126,12 @@ router.route('/news-update/:news').get(function(req, res, next) {
         res.redirect('/');
 
     } else {
-        req.flash('catagory', 'Catagory have to select');
+        req.flash('catagory',isLoggedIn, 'Catagory have to select');
         res.redirect('/news-update/' + id);
 
     }
 })
-router.get('/delete/:id', (req, res) => {
+router.get('/delete/:id',isLoggedIn, (req, res) => {
     var id = req.params.id;
     console.log(id);
     connection.query('delete from details where news_id=?', id, function(err, doc) {
@@ -142,7 +142,7 @@ router.get('/delete/:id', (req, res) => {
         }
     })
 })
-router.get('/activate/:id',(req,res)=>{
+router.get('/activate/:id',isLoggedIn,(req,res)=>{
     var id=req.params.id;
     connection.query('update news set active=1 where id=?',id,function (err,doc) {
                         if(err) throw err;
@@ -153,22 +153,62 @@ router.get('/activate/:id',(req,res)=>{
 })
 
 
+router.get('/notdraft/:id',isLoggedIn,(req,res)=>{
+    var id=req.params.id;
+    connection.query('update news set draft=0 where id=?',id,function (err,doc) {
+                        if(err) throw err;
+                        else{
+                            res.redirect('/');
+                        }    
+                    })
+})
 
-router.get('/image-list', function(req, res, next) {
+router.get('/disactivate/:id',isLoggedIn,(req,res)=>{
+    var id=req.params.id;
+    connection.query('update news set active=0 where id=?',id,function (err,doc) {
+                        if(err) throw err;
+                        else{
+                            res.redirect('/');
+                        }    
+                    })
+})
+
+
+
+
+router.get('/image-list',isLoggedIn, function(req, res, next) {
     res.render('pages/image-list', { title: 'Image List' });
 });
 
-router.get('/image-upload', function(req, res, next) {
+router.get('/image-upload',isLoggedIn, function(req, res, next) {
     res.render('pages/image-upload', { title: 'Image Upload' });
 });
 
-router.get('/statistics', function(req, res, next) {
+router.get('/statistics',isLoggedIn, function(req, res, next) {
     res.render('pages/statistics', { title: 'Statistics' });
 });
 
-router.get('/profile', function(req, res, next) {
+router.get('/profile',isLoggedIn, function(req, res, next) {
     res.render('pages/profile', { title: 'User Profile' });
 });
 
+
+
+router.get('/logout',isLoggedIn, function(req, res) {
+    req.logout();
+    res.redirect('/users/');
+});
+
+
+// route middleware to make sure
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
 
 module.exports = router;
